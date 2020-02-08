@@ -32,7 +32,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 		fonts = r.FormValue("fonts")
 		text = r.FormValue("text")
-		Result = AsciiMain(text, fonts)
+		AsciiMain(text, fonts)
 		tmpl, _ := template.ParseFiles("static/index.html")
 		tmpl.Execute(w, Result)
 	default:
@@ -50,7 +50,7 @@ func main() {
 	}
 }
 
-func AsciiMain(text string, fonts string) string {
+func AsciiMain(text string, fonts string) {
 	var hell string
 	for _, e := range text {
 		if e == '§' || e == '±' || e == '”' || e == '“' {
@@ -60,44 +60,61 @@ func AsciiMain(text string, fonts string) string {
 	if fonts == "Thinkertoy" {
 		file, _ := os.Open("thinkertoy.txt")
 		fileVal := ScanFile(file)
-		narg := strings.Split(text, "\n")
+		var test []string
+		arg := text
+		for _, v := range test {
+			arg += " " + v
+		}
+		narg := strings.Split(arg, "\\n")
 		for _, v := range narg {
 			hell = printLetter(string(v), fileVal)
 		}
 	} else if fonts == "Shadow" {
 		file, _ := os.Open("shadow.txt")
 		fileVal := ScanFile(file)
-		narg := strings.Split(text, "\n")
+		var test []string
+		arg := text
+		for _, v := range test {
+			arg += " " + v
+		}
+		narg := strings.Split(arg, "\\n")
 		for _, v := range narg {
 			hell = printLetter(string(v), fileVal)
 		}
 	} else if fonts == "Standard" {
 		file, _ := os.Open("standard.txt")
 		fileVal := ScanFile(file)
-		narg := strings.Split(text, "\n")
+		var test []string
+		arg := text
+		for _, v := range test {
+			arg += " " + v
+		}
+		narg := strings.Split(arg, "\\n")
 		for _, v := range narg {
-			hell = printLetter(string(v), fileVal)
+			printLetter(string(v), fileVal)
 		}
 	} else {
 		fmt.Println("Problem")
 	}
-	return hell
+	fmt.Println(hell)
+
+	return
 
 }
 
 func printLetter(s string, fileVal []string) string {
-	var help string
 	for i := 1; i <= 8; i++ {
 		for _, arg := range s {
 			indexBase := int(rune(arg)-32) * 9
-			help += string(fileVal[indexBase+i])
+			Result += string(fileVal[indexBase+i])
 		}
-		help += "\n"
+		Result += "\n"
 	}
-	return help
+	return Result
 }
 
 func ScanFile(arg *os.File) []string {
+	Result = ""
 	var fileValue []string
 	scanner := bufio.NewScanner(arg)
 	for scanner.Scan() {
