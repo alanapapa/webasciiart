@@ -59,11 +59,7 @@ func AsciiMain(text string, fonts string) {
 	if fonts == "Thinkertoy" {
 		file, _ := os.Open("thinkertoy.txt")
 		fileVal := ScanFile(file)
-		var test []string
-		arg := text
-		for _, v := range test {
-			arg += " " + v
-		}
+		arg := text + " "
 		narg := strings.Split(arg, "\\n")
 		for _, v := range narg {
 			printLetter(string(v), fileVal)
@@ -71,11 +67,7 @@ func AsciiMain(text string, fonts string) {
 	} else if fonts == "Shadow" {
 		file, _ := os.Open("shadow.txt")
 		fileVal := ScanFile(file)
-		var test []string
-		arg := text
-		for _, v := range test {
-			arg += " " + v
-		}
+		arg := text + " "
 		narg := strings.Split(arg, "\\n")
 		for _, v := range narg {
 			printLetter(string(v), fileVal)
@@ -83,11 +75,7 @@ func AsciiMain(text string, fonts string) {
 	} else if fonts == "Standard" {
 		file, _ := os.Open("standard.txt")
 		fileVal := ScanFile(file)
-		var test []string
-		arg := text
-		for _, v := range test {
-			arg += " " + v
-		}
+		arg := text + " "
 		narg := strings.Split(arg, "\\n")
 		for _, v := range narg {
 			printLetter(string(v), fileVal)
